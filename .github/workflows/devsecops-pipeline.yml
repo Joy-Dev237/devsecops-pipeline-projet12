@@ -1,0 +1,57 @@
+name: DevSecOps Pipeline - Projet 12
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  security-scans:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🔐 Gitleaks - Secret Scanning
+        uses: gitleaks/gitleaks-action@v3
+
+      - name: 📊 Semgrep - SAST
+        uses: semgrep/semgrep-action@v1
+        with:
+          config: "p/owasp-top-ten,p/nodejs,p/secrets"
+
+      - name: 🐳 Build Docker Image
+        run: docker build -f docker/Dockerfile -t devsecops-app:${{ github.sha }} .
+
+      - name: 🛡️ Trivy Scan (Container + SCA)
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'devsecops-app:${{ github.sha }}'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          severity: 'CRITICAL'
+          exit-code: '1'
+
+      - name: 📤 Upload Results to GitHub Security
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: 'trivy-results.sarif'
+
+      - name: 📋 Generate SBOM CycloneDX
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'devsecops-app:${{ github.sha }}'
+          format: 'cyclonedx'
+          output: 'sbom.cdx.json'
+
+      - name: Upload SBOM
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom
+          path: sbom.cdx.json
