@@ -56,3 +56,5 @@ jobs:
         with:
           name: sbom
           path: sbom.cdx.json
+     
+       FAKE_SECRET = "sk-test123456789";
