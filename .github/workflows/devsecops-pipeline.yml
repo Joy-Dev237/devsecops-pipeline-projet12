@@ -51,12 +51,11 @@ jobs:
           format: 'cyclonedx'
           output: 'sbom.cdx.json'
 
-      - name:  Policy as Code - OPA/Conftest
-        uses: instrumenta/conftest-action@main
+      - name: 🔐 Policy as Code - OPA/Conftest
+        uses: instrumenta/conftest-action@master
         with:
           policy: security/opa-policies
           target: docker/Dockerfile
-
       - name: Upload SBOM
         uses: actions/upload-artifact@v4
         with:
