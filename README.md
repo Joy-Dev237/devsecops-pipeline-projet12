@@ -21,21 +21,3 @@ flowchart TD
     H -->|✅ Tout vert| I[Déploiement autorisé]
     H -->|❌ Échec| J[Blocage automatique + rapport]
 
-
-🔧 Outils Intégrés
-
-Secret Scanning → Gitleaks
-SAST → Semgrep (OWASP rules)
-SCA + Conteneurs → Trivy
-SBOM → CycloneDX
-Policy as Code → OPA/Conftest
-
-📊 Résultats
-
-Pipeline complet en moins de 2 minutes
-Détection automatique de secrets
-Image Docker durcie (non-root, Alpine)
-Rapports SARIF visibles dans Security tab
-
-Livrable principal : Pipeline fonctionnel + documentation complète.
-
