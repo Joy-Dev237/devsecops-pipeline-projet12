@@ -1,8 +1,8 @@
-# DevSecOps Pipeline - Projet Académique n°12
+# 🚀 DevSecOps Pipeline - Projet Académique n°12
 
 **Sécurisation des Pipelines CI/CD — Approche Shift Left Security**
 
-![GitHub Actions Status](https://github.com/Joy-Dev237/devsecops-pipeline-projet12/actions/workflows/devsecops-pipeline.yml/badge.svg)
+![GitHub Actions](https://github.com/Joy-Dev237/devsecops-pipeline-projet12/actions/workflows/devsecops-pipeline.yml/badge.svg)
 
 ## Objectif du Projet
 Implémentation d’un pipeline CI/CD sécurisé intégrant détection de secrets, SAST, SCA, sécurité des conteneurs et Policy as Code.
@@ -20,4 +20,3 @@ flowchart TD
     G --> H[OPA/Conftest - Policy as Code]
     H -->|✅ Tout vert| I[Déploiement autorisé]
     H -->|❌ Échec| J[Blocage automatique + rapport]
-
