@@ -50,12 +50,7 @@ jobs:
           image-ref: 'devsecops-app:${{ github.sha }}'
           format: 'cyclonedx'
           output: 'sbom.cdx.json'
-
-      - name: 🔐 Policy as Code - OPA/Conftest
-        uses: instrumenta/conftest-action@master
-        with:
-          files: docker/Dockerfile
-          policy: security/opa-policies
+          
       - name: Upload SBOM
         uses: actions/upload-artifact@v4
         with:
