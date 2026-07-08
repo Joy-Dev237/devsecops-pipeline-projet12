@@ -18,12 +18,13 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name:  Gitleaks - Secret Scanning
+      - name: 🔐 Gitleaks - Secret Scanning
         uses: gitleaks/gitleaks-action@v3
         with:
-          config: .gitleaks.toml
+          config-path: .gitleaks.toml
+          no-git: false
+          scan-path: .
         env:
-          GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}  # Optionnel
           GITLEAKS_ENABLE_COMMENTS: false
 
       - name:  Semgrep - SAST
