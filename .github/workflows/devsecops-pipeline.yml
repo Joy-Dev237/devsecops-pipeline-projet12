@@ -22,12 +22,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Run Gitleaks (Docker)
-        run: |
-          docker run --rm \
-            -v $PWD:/src \
-            gitleaks/gitleaks:latest \
-            detect --source /src --verbose --redact --exit-code 1
+      - name: Gitleaks - Secret Scanning
+        uses: gitleaks/gitleaks-action@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   # ============================================
   # JOB 2 : SAST (Semgrep)
