@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const AWS_ACCESS_KEY = "AKIAIOSFODNN7EXAMPLE-SECRET-TEST-2026-TEST-SECRET"; // SECRET TEST - DOIT ÊTRE BLOQUÉ PAR GITLEAKS
 
 app.get('/', (req, res) => {
   res.send('API DevSecOps - Projet 12 - Vulnérable intentionnellement');
