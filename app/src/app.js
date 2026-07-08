@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const TEST_SECRET = "AKIAIOSFODNN7EXAMPLE-123456";
 
 app.get('/', (req, res) => {
   res.send('API DevSecOps - Projet 12 - Vulnérable intentionnellement');
